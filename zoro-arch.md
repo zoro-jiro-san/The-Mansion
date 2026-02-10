@@ -14,6 +14,44 @@ The mansion architecture follows a **hierarchical orchestration pattern** where:
 
 ---
 
+## CRITICAL RULES - Must Follow
+
+**These rules are ABSOLUTE and must be followed by all agents implementing this architecture:**
+
+1. **Task Flow**: 
+   - ✅ **ALL tasks from human user go DIRECTLY to Factory Manager**
+   - ❌ Zorro does NOT create teams or spawn agents directly
+   - ✅ Zorro delegates ALL task execution to Factory Manager
+   - ✅ Factory Manager is responsible for ALL agent creation and spawning
+
+2. **Factory Manager Responsibilities**:
+   - ✅ Receives ALL tasks from Zorro
+   - ✅ Creates teams when needed (NOT Zorro's job)
+   - ✅ Discusses with Librarian about what skills agents need
+   - ✅ Coordinates with Butler for API key assignment
+   - ✅ Creates PRD for each task
+   - ✅ Spawns all sub-agents
+
+3. **Butler API Management**:
+   - ✅ Butler assesses the work and assigns appropriate secondary API key
+   - ✅ Butler rotates API keys when **80% limit is reached** (not 90%)
+   - ✅ Butler manages ALL secondary API keys for ALL mansion members (except Zorro)
+
+4. **Janitor Timing**:
+   - ✅ Janitor ONLY runs AFTER tasks are completed
+   - ✅ Moderator has the right to summon Janitor after job completion
+   - ❌ Janitor must NEVER run during active task execution
+   - ✅ Janitor must verify no active tasks before cleanup
+
+5. **Team Creation**:
+   - ✅ Factory Manager creates teams (during agent spawning)
+   - ❌ Zorro does NOT create teams
+   - ✅ Moderator manages teams created by Factory Manager
+
+**Violation of these rules will cause system failures. All agents must strictly adhere to these rules.**
+
+---
+
 ## The Mansion Hierarchy
 
 ```
@@ -95,12 +133,18 @@ The mansion architecture follows a **hierarchical orchestration pattern** where:
 - Receives progress updates from Moderator
 - Makes strategic decisions based on agent reports
 
+**CRITICAL WORKFLOW RULE**: 
+- **ALL tasks from human user go DIRECTLY to Factory Manager**
+- Zorro does NOT create teams or spawn agents directly
+- Zorro delegates ALL task execution to Factory Manager
+- Factory Manager is responsible for ALL agent creation and spawning
+
 **Workflow**:
 1. Human provides task to Zorro
-2. Zorro analyzes task requirements
-3. Zorro contacts Factory Manager to spawn appropriate sub-agents
-4. Zorro monitors progress through Moderator
-5. Zorro receives final completion status
+2. Zorro receives task and immediately delegates to Factory Manager
+3. Zorro monitors progress through Moderator (receives updates only)
+4. Zorro receives final completion status from Moderator
+5. Zorro never directly creates teams or spawns agents - this is Factory Manager's responsibility
 
 ---
 
@@ -166,16 +210,18 @@ The mansion architecture follows a **hierarchical orchestration pattern** where:
 **4. API Rotation Strategy**:
 - **Continuous Monitoring**: Tracks usage for each API key in real-time
 - **Rotation Triggers**:
-  - **Warning Level (80%)**: Flagged for rotation, prepare alternative
-  - **Rotation Level (90%)**: Actively rotate to alternative API
+  - **Rotation Level (80%)**: Actively rotate to alternative API when 80% limit is reached (PRIMARY ROTATION THRESHOLD)
+  - **Warning Level (75%)**: Flagged for rotation, prepare alternative
   - **Emergency Level (95%)**: Immediate rotation, pause requests if needed
 - **Rotation Process**:
-  1. Identify API key approaching limit
+  1. Identify API key approaching 80% limit
   2. Select alternative API key from available pool
   3. Migrate active requests to new API key (if possible)
   4. Update all agents using the exhausted key
   5. Mark exhausted key for cooldown period
   6. Resume operations with new key
+
+**CRITICAL**: Butler rotates API keys when 80% limit is reached (not 90%). This is the primary rotation threshold.
 
 **5. Request Routing**:
 - **Load Balancing**: Distributes requests across available API keys
@@ -440,11 +486,13 @@ Skills Library/
   - GitHub dashboard link for detailed view
 
 **7. Team Management**:
-- **Team Formation**: Groups sub-agents into teams for complex tasks
-- **Team Assignment**: Assigns team-level tasks
-- **Team Coordination**: Coordinates communication within teams
-- **Team Progress Tracking**: Tracks progress at team level
-- **Team Performance**: Monitors team performance metrics
+- **Team Formation**: Factory Manager creates teams (NOT Moderator or Zorro)
+- **Team Assignment**: Factory Manager assigns team-level tasks
+- **Team Coordination**: Moderator coordinates communication within teams
+- **Team Progress Tracking**: Moderator tracks progress at team level
+- **Team Performance**: Moderator monitors team performance metrics
+
+**NOTE**: Teams are created by Factory Manager during agent spawning phase, not by Moderator or Zorro.
 
 **Monitoring Capabilities**:
 - Real-time task status tracking
@@ -500,6 +548,7 @@ Skills Library/
 - Coordinates with Gatekeeper for code reviews
 - Updates GitHub monitoring dashboard continuously
 - Receives status updates from sub-agents
+- **Summons Janitor**: Moderator has the right to summon Janitor AFTER tasks are completed
 
 **Data Structures**:
 - Sub-Agent Registry: `{agent_id: string, task: string, status: 'active'|'blocked'|'completed'|'failed', progress: number, last_update: datetime, performance_metrics: object}`
@@ -670,8 +719,12 @@ Skills Library/
 
 **Role**: Sub-agent creation and task assignment specialist
 
+**CRITICAL RESPONSIBILITY**: Factory Manager receives **ALL tasks directly from Zorro**. Zorro does NOT create teams or spawn agents - Factory Manager handles ALL agent creation and spawning.
+
 **Responsibilities**:
+- **Primary Task Receiver**: Receives ALL tasks from Zorro (Zorro delegates all tasks here)
 - **Sub-Agent Creation**: Spawns new sub-agents based on task requirements
+- **Team Creation**: Creates teams of sub-agents when needed (NOT Zorro's responsibility)
 - **Task Analysis**: Analyzes tasks to determine required agent types
 - **PRD Creation**: Creates detailed Product Requirements Documents (PRDs) for sub-agents
 - **Resource Coordination**: Coordinates with Butler (API keys) and Librarian (skills)
@@ -689,7 +742,7 @@ Each PRD includes:
 7. **Timeline**: Estimated completion time
 
 **Agent Creation Workflow**:
-1. **Receive Task**: Factory Manager receives task assignment from Zorro
+1. **Receive Task**: Factory Manager receives task assignment DIRECTLY from Zorro (ALL tasks go here first)
 2. **Task Analysis**: Analyzes task to understand:
    - Complexity level
    - Required capabilities
@@ -698,7 +751,7 @@ Each PRD includes:
    - Resource requirements
 3. **Agent Type Determination**: Determines what type of agent(s) needed:
    - Single specialized agent
-   - Team of agents
+   - Team of agents (Factory Manager creates teams, NOT Zorro)
    - Parallel lanes (Ant Farm structure)
 4. **PRD Creation**: Creates comprehensive PRD including:
    - Clear task description
@@ -708,17 +761,24 @@ Each PRD includes:
    - Success criteria
    - Dependencies and prerequisites
    - Timeline estimates
-5. **Resource Coordination**:
-   - Requests API key from Butler (Butler assigns secondary API key)
-   - Requests skills from Librarian (Librarian matches skills to task)
-6. **Agent Spawning**: Creates sub-agent(s) with:
+5. **Resource Coordination** (Factory Manager coordinates with specialists):
+   - **Discusses with Librarian**: Factory Manager discusses task requirements with Librarian to determine what skills agents will need
+   - **Requests API key from Butler**: Factory Manager requests API key from Butler, who assesses the work and assigns appropriate secondary API key
+   - **Librarian provides skills**: Librarian matches skills to task requirements and provides them
+6. **Agent Spawning**: Factory Manager creates sub-agent(s) with:
    - Complete PRD
-   - Assigned API key (from Butler)
-   - Required skills (from Librarian)
+   - Assigned API key (from Butler, who assessed the work)
+   - Required skills (from Librarian, after discussion)
    - Initial context and configuration
 7. **Handoff**: Hands sub-agent to Moderator for ongoing management
 8. **Tracking**: Tracks agent creation, assignment, and lifecycle
 9. **Learning**: Records patterns for future agent creation optimization
+
+**IMPORTANT NOTES**:
+- Factory Manager discusses with Librarian about what skills agents need BEFORE spawning
+- Butler assesses the work and assigns appropriate secondary API key
+- Butler rotates API keys when 80% limit is reached (not 90%)
+- Factory Manager handles ALL team creation - Zorro does NOT create teams
 
 **Agent Types**:
 - **Specialized Agents**: Task-specific agents (e.g., Frontend Developer, Backend Developer, Tester)
@@ -726,9 +786,11 @@ Each PRD includes:
 - **Team Agents**: Agents designed to work in teams
 
 **Key Interactions**:
-- Receives task assignments from Zorro
-- Requests API keys from Butler
-- Requests skills from Librarian
+- **Receives ALL tasks from Zorro** (ALL tasks go directly to Factory Manager)
+- **Discusses with Librarian** about what skills agents will need
+- Requests API keys from Butler (Butler assesses work and assigns)
+- Receives skills from Librarian (after discussion)
+- **Creates teams** when needed (Factory Manager handles ALL team creation, NOT Zorro)
 - Spawns sub-agents with complete setup
 - Hands off to Moderator for management
 - Coordinates with Moderator for additional agent needs
@@ -744,6 +806,8 @@ Each PRD includes:
 
 **Role**: System cleanup and maintenance specialist
 
+**CRITICAL TIMING RULE**: Janitor ONLY runs AFTER tasks are completed. Moderator has the right to summon Janitor when jobs are done. Janitor should NEVER run during active task execution.
+
 **Responsibilities**:
 - **Cache Cleanup**: Removes temporary cache files after task completion
 - **Context Cleanup**: Cleans up unused context and memory
@@ -754,10 +818,12 @@ Each PRD includes:
 - **Post-Task Cleanup**: Executes cleanup after task completion
 
 **Cleanup Triggers**:
-- Task completion signal from Moderator
-- Scheduled cleanup cycles
-- Storage threshold reached
-- Manual cleanup request from Zorro
+- **Primary Trigger**: Task completion signal from Moderator (Moderator summons Janitor after job completion)
+- Scheduled cleanup cycles (only when no active tasks)
+- Storage threshold reached (only when no active tasks)
+- Manual cleanup request from Zorro (only when no active tasks)
+
+**IMPORTANT**: Janitor must verify no active tasks exist before running cleanup. If tasks are active, Janitor should wait for Moderator's signal.
 
 **Cleanup Process**:
 1. Receive cleanup signal
@@ -779,10 +845,11 @@ Each PRD includes:
   - Part of active tasks
 
 **Key Interactions**:
-- Receives cleanup requests from Moderator (after task completion)
-- Receives cleanup requests from Zorro (manual)
+- **Receives summons from Moderator**: Janitor is summoned by Moderator AFTER tasks are completed
+- Receives cleanup requests from Zorro (manual, only when no active tasks)
 - Coordinates with Gatekeeper to verify Git status
-- Reports cleanup results
+- Reports cleanup results to Moderator
+- **Never runs during active tasks**: Janitor must verify no active tasks before cleanup
 
 **Data Structures**:
 - Cleanup Queue: `{file_path: string, type: 'cache'|'context'|'temp'|'git', status: 'pending'|'archived'|'deleted'}`
@@ -1084,22 +1151,24 @@ The Learning System enables sub-agents and mansion members to learn from success
 
 ### Phase 1: Task Initiation
 1. **Human User** → Provides task to **Zorro**
-2. **Zorro** → Analyzes task and requirements
-3. **Zorro** → Contacts **Factory Manager** with task details
+2. **Zorro** → Receives task and immediately delegates to **Factory Manager** (ALL tasks go directly to Factory Manager)
+3. **Zorro** → Does NOT create teams or spawn agents (this is Factory Manager's responsibility)
 
 ### Phase 2: Agent Creation
-4. **Factory Manager** → Analyzes task requirements
-5. **Factory Manager** → Creates PRD (Task, Roadmap, Checkpoints, Tests, Success Criteria)
-6. **Factory Manager** → Requests API key from **Butler**
-7. **Butler** → Assigns secondary API key from available pool
-8. **Factory Manager** → Requests skills from **Librarian**
-9. **Librarian** → Matches skills to task requirements
-10. **Librarian** → Provides skills to Factory Manager
-11. **Factory Manager** → Spawns sub-agent with:
+4. **Factory Manager** → Receives task from Zorro (ALL tasks come here first)
+5. **Factory Manager** → Analyzes task requirements
+6. **Factory Manager** → Creates PRD (Task, Roadmap, Checkpoints, Tests, Success Criteria)
+7. **Factory Manager** → **Discusses with Librarian** about what skills agents will need for this task
+8. **Librarian** → Provides skill recommendations based on task requirements
+9. **Factory Manager** → Requests API key from **Butler**
+10. **Butler** → **Assesses the work** and assigns appropriate secondary API key
+11. **Librarian** → Provides matched skills to Factory Manager
+12. **Factory Manager** → Creates teams if needed (Factory Manager handles ALL team creation)
+13. **Factory Manager** → Spawns sub-agent(s) with:
     - PRD
-    - API key (from Butler)
-    - Required skills (from Librarian)
-12. **Factory Manager** → Hands off sub-agent to **Moderator**
+    - API key (from Butler, who assessed the work)
+    - Required skills (from Librarian, after discussion)
+14. **Factory Manager** → Hands off sub-agent to **Moderator**
 
 ### Phase 3: Task Execution
 13. **Moderator** → Begins monitoring sub-agent
@@ -1159,15 +1228,19 @@ The Learning System enables sub-agents and mansion members to learn from success
 31. **Moderator** → Reports completion to Zorro
 32. **Zorro** → Confirms completion with human user
 
-### Phase 8: Cleanup
-33. **Moderator** → Signals task completion to **Janitor**
-34. **Janitor** → Performs cleanup:
+### Phase 8: Cleanup (ONLY AFTER TASK COMPLETION)
+33. **Moderator** → Validates all tasks are completed
+34. **Moderator** → **Summons Janitor** (Moderator has the right to summon Janitor after job completion)
+35. **Janitor** → Verifies no active tasks exist
+36. **Janitor** → Performs cleanup:
     - Removes cache files
     - Cleans unused context
     - Removes unnecessary files
     - Cleans Git-tracked files (already committed & pushed)
-35. **Janitor** → Reports cleanup completion
-36. **Sub-Agent** → Terminated (if no longer needed)
+37. **Janitor** → Reports cleanup completion to Moderator
+38. **Sub-Agent** → Terminated (if no longer needed)
+
+**CRITICAL**: Janitor ONLY runs AFTER tasks are completed. Moderator summons Janitor when jobs are done. Janitor must verify no active tasks before cleanup.
 
 ---
 
@@ -1245,7 +1318,7 @@ Sub-agents and Moderator maintain **continuous, active interaction** throughout 
 - **Follow-up**: Moderator follows up to ensure blocker is resolved
 
 **5. Team Coordination**:
-- **Team Formation**: Moderator forms teams of sub-agents when needed
+- **Team Management**: Moderator manages teams created by Factory Manager (Factory Manager creates teams, Moderator manages them)
 - **Team Communication**: Moderator facilitates communication between team members
 - **Team Progress**: Moderator tracks team-level progress
 - **Team Coordination**: Moderator coordinates team activities
@@ -1416,10 +1489,12 @@ If Rejected: Sub-Agent → Fix Issues → Resubmit
   5. Butler marks old key for cooldown
 
 ### Rotation Thresholds
-- **Warning (80%)**: Flagged for rotation, prepare alternative
-- **Rotation (90%)**: Actively rotate to alternative API
+- **Rotation (80%)**: Actively rotate to alternative API when 80% limit is reached
+- **Warning (75%)**: Flagged for rotation, prepare alternative
 - **Emergency (95%)**: Immediate rotation, pause requests if needed
 - **Exhausted (100%)**: Key marked exhausted, all requests routed elsewhere
+
+**CRITICAL**: Butler rotates API keys when 80% limit is reached (not 90%). This is the primary rotation threshold.
 
 ### Context & Rate Limit Management
 - **Context Overflow**: Butler prevents context overflow for all agents
