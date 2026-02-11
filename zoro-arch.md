@@ -1,5 +1,5 @@
 # Zoro Agent Architecture: The Mansion
-
+Updated Path : https://github.com/zoro-jiro-san/The-Mansion/blob/main/skill.md
 ## Overview
 
 The Zoro agent system is architected as a hierarchical mansion structure, where **Zorro** serves as the master orchestrator and head of the household. The mansion operates with specialized agents, each fulfilling distinct roles in a coordinated workflow. This document serves as the complete architectural blueprint for understanding and implementing the Zoro agent ecosystem.
