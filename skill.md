@@ -1,8 +1,27 @@
 # Zoro Agent Architecture: The Mansion
 
+## Architecture Documents
+
+This architectural system is organized into four complementary documents:
+
+1. **[SOUL.md](./SOUL.md)** - **Who We Are**: Identity, character, beliefs, and what makes The Mansion unique
+2. **[PRINCIPLES.md](./PRINCIPLES.md)** - **How We Operate**: Decision-making heuristics, tension resolution, and operational principles
+3. **[AGENTS.md](./AGENTS.md)** - **How We Navigate the World**: Detailed operational manual, workflows, protocols, and procedures
+4. **skill.md (this document)** - **Complete Technical Reference**: Full architectural blueprint and implementation guide
+
+**Read these in order to understand The Mansion:**
+- Start with **SOUL.md** to understand our identity
+- Then **PRINCIPLES.md** to learn how we make decisions
+- Then **AGENTS.md** for operational details
+- Use **skill.md** as the comprehensive reference
+
+---
+
 ## Overview
 
-The Zoro agent system is architected as a hierarchical mansion structure, where **Zorro** serves as the master orchestrator and head of the household. The mansion operates with specialized agents, each fulfilling distinct roles in a coordinated workflow. This document serves as the complete architectural blueprint for understanding and implementing the Zoro agent ecosystem.
+The Zoro agent system is architected as a hierarchical mansion structure, where **Zorro** serves as the master orchestrator and head of the household. The mansion operates with specialized agents, each fulfilling distinct roles in a coordinated workflow.
+
+**Key Innovation**: Butler, Librarian, Gatekeeper, and Moderator work **INSIDE the Ant Farm** with sub-agents, not managing from outside. This enables embedded coordination, faster response times, and real-time learning.
 
 ## Architecture Philosophy
 
@@ -50,11 +69,22 @@ The mansion architecture follows a **hierarchical orchestration pattern** where:
 
 6. **Ant Farm Organization**:
    - ✅ Sub-agents MUST be organized in Ant Farm lanes (parallel execution structure)
-   - ✅ Ant Farm lanes are coordinated with Moderator, Librarian, and Butler
+   - ✅ Factory Manager creates Ant Farm structure with sub-agents + embedded coordinators
    - ✅ Each Ant Farm lane operates independently with its own resources
-   - ✅ Factory Manager creates Ant Farm lanes during agent spawning
+
+7. **Embedded Coordinators (CRITICAL)**:
+   - ✅ Butler, Librarian, Gatekeeper, and Moderator work INSIDE the Ant Farm
+   - ❌ They do NOT manage from outside - they are embedded coordinators
+   - ✅ They work alongside sub-agents in real-time
+   - ✅ All coordinators collaborate within the Ant Farm structure
+   - ✅ This enables faster response times, real-time learning, and better context
 
 **Violation of these rules will cause system failures. All agents must strictly adhere to these rules.**
+
+**For detailed implementation, see:**
+- **[SOUL.md](./SOUL.md)** - Identity and character
+- **[PRINCIPLES.md](./PRINCIPLES.md)** - Decision-making and tension resolution
+- **[AGENTS.md](./AGENTS.md)** - Complete operational manual
 
 ---
 
@@ -68,56 +98,61 @@ The mansion architecture follows a **hierarchical orchestration pattern** where:
                            │
         ┌──────────────────┼──────────────────┐
         │                  │                  │
-   ┌────▼────┐       ┌─────▼─────┐      ┌────▼─────┐
-   │ Factory │       │ Moderator │      │ Security │
-   │ Manager │       │           │      │ Officer  │
-   │         │       │           │      │          │
-   │(Manages)│       │(Manages)  │      │(Manages) │
-   └────┬────┘       └─────┬─────┘      └──────────┘
-        │                  │                  │
-        │                  │                  │
-   ┌────▼────┐       ┌─────▼─────┐      ┌────▼─────┐
-   │ Butler  │       │Librarian  │      │Gatekeeper│
-   │         │       │           │      │          │
-   │(Manages │       │(Provides  │      │(Reviews  │
-   │ ALL API │       │ Skills)   │      │ Code)    │
-   │ Keys)   │       │           │      │          │
-   └────┬────┘       └─────┬─────┘      └─────┬────┘
-        │                  │                  │
-        │                  │                  │
-   ┌────▼──────────────────┼──────────────────▼─────┐
-   │                    Janitor                      │
-   │              (Cleanup Specialist)                │
-   └───────────────────────┬─────────────────────────┘
+   ┌────▼────┐       ┌─────▼─────────┐
+   │ Factory │       │   Security    │
+   │ Manager │       │   Officer     │
+   │         │       │               │
+   │(Creates)│       │   (Protects)  │
+   └────┬────┘       └───────────────┘
+        │
+        │ Creates & Hands Off
+        │
+   ┌────▼─────────────────────────────────────────────────────┐
+   │                    ANT FARM STRUCTURE                     │
+   │                  (Embedded Coordination)                  │
+   │                                                            │
+   │  ┌──────────────────────────────────────────────────┐   │
+   │  │              COORDINATORS (Embedded)              │   │
+   │  │  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌─────┐ │   │
+   │  │  │Moderator │ │  Butler  │ │Librarian │ │Gate-│ │   │
+   │  │  │  (On-    │ │ (Real-   │ │(On-Demand│ │keeper│ │   │
+   │  │  │ Ground)  │ │  Time)   │ │  Skills) │ │(Code)│ │   │
+   │  │  └──────────┘ └──────────┘ └──────────┘ └─────┘ │   │
+   │  │       Working together, coordinating lanes       │   │
+   │  └──────────────────────────────────────────────────┘   │
+   │                                                            │
+   │  ┌──────────────────────────────────────────────────┐   │
+   │  │           EXECUTION LANES (Parallel)              │   │
+   │  │  ┌────────┐    ┌────────┐    ┌────────┐         │   │
+   │  │  │ Lane 1 │    │ Lane 2 │    │ Lane 3 │         │   │
+   │  │  │Sub-Agts│    │Sub-Agts│    │Sub-Agts│         │   │
+   │  │  │ Team A │    │ Team B │    │ Team C │         │   │
+   │  │  └────────┘    └────────┘    └────────┘         │   │
+   │  └──────────────────────────────────────────────────┘   │
+   │                                                            │
+   │  Created by: Factory Manager                              │
+   │  Coordinators: Butler, Librarian, Moderator, Gatekeeper  │
+   │  (All working INSIDE, not managing from outside)         │
+   │                                                            │
+   └────────────────────────────────────────────────────────────┘
                            │
-                    ┌──────▼──────────────────────────────────────┐
-                    │         ANT FARM STRUCTURE                  │
-                    │  (Sub-Agents organized in parallel lanes)   │
-                    │                                              │
-                    │  ┌──────────┐  ┌──────────┐  ┌──────────┐ │
-                    │  │  Lane 1  │  │  Lane 2  │  │  Lane 3  │ │
-                    │  │          │  │          │  │          │ │
-                    │  │ Sub-Agts │  │ Sub-Agts │  │ Sub-Agts │ │
-                    │  │ Team A   │  │ Team B   │  │ Team C   │ │
-                    │  └──────────┘  └──────────┘  └──────────┘ │
-                    │                                              │
-                    │  Created by: Factory Manager                 │
-                    │  Managed by: Moderator                      │
-                    │  API from: Butler (coordinated)              │
-                    │  Skills from: Librarian (coordinated)       │
-                    │                                              │
-                    │  Each lane operates independently           │
-                    │  with coordination from Moderator,           │
-                    │  Librarian, and Butler                       │
-                    └──────────────────────────────────────────────┘
+                           │ After ALL tasks complete
+                           │
+                    ┌──────▼──────┐
+                    │   JANITOR   │ (Cleanup at the very end)
+                    │             │ (Summoned by Moderator)
+                    └─────────────┘
 ```
 
 **Hierarchy Rules**:
-- **Zorro**: Top level, uses PRIMARY API exclusively
-- **Factory Manager & Moderator**: Direct management of sub-agents
-- **Butler**: Manages ALL secondary API keys for ALL mansion members (except Zorro)
-- **Sub-Agents**: Organized in Ant Farm lanes (parallel execution structure)
-- **Ant Farm Coordination**: Moderator, Librarian, and Butler coordinate with Ant Farm lanes
+- **Zorro**: Top level, uses PRIMARY API exclusively, delegates to Factory Manager
+- **Factory Manager**: Creates PRDs, spawns Ant Farm with sub-agents + embedded coordinators
+- **Security Officer**: Protects sensitive resources (.env, wallets, transactions)
+- **Ant Farm Structure**: Where all the work happens
+  - **Coordinators (Inside)**: Moderator, Butler, Librarian, Gatekeeper work INSIDE the Ant Farm
+  - **Sub-Agents**: Execute tasks in parallel lanes, work with embedded coordinators
+  - **Coordinators are embedded**: Not managing from outside, but working alongside sub-agents
+- **Janitor**: Cleanup at the very end, AFTER all tasks complete (summoned by Moderator)
 
 ---
 
