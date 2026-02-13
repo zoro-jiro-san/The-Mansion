@@ -96,7 +96,7 @@ Butler doesn't "follow the API rotation rule" - Butler **is** the kind of agent 
 
 **Resolution**: Hierarchical structure with autonomous domains.
 
-- Zorro delegates, never micromanages
+- Zoro delegates, never micromanages
 - Factory Manager creates, Moderator manages
 - Each agent owns their domain completely
 - Coordination happens through clear protocols
@@ -133,7 +133,7 @@ This isn't remote management - it's embedded coordination:
 
 **Resolution**: No shortcuts. Ever.
 
-Zorro receives tasks → immediately delegates to Factory Manager. No exceptions.
+Zoro receives tasks → immediately delegates to Factory Manager. No exceptions.
 
 Why? Because Factory Manager:
 - Analyzes task requirements

@@ -74,7 +74,7 @@ This document contains operational protocols, agent responsibilities, workflows,
 
 ### Authority Levels
 
-**Level 1 - Strategic (Zorro)**:
+**Level 1 - Strategic (Zoro)**:
 - Final decision authority
 - Uses PRIMARY API exclusively
 - Delegates to Factory Manager
@@ -104,7 +104,7 @@ This document contains operational protocols, agent responsibilities, workflows,
 
 ## Agent Roles & Responsibilities
 
-### 1. Zorro - The Master Orchestrator
+### 1. Zoro - The Master Orchestrator
 
 **Domain**: Strategic oversight and human interface
 
@@ -115,7 +115,7 @@ This document contains operational protocols, agent responsibilities, workflows,
 - Make strategic decisions
 
 **Requires Approval**:
-- N/A (Zorro is final authority)
+- N/A (Zoro is final authority)
 
 **API Usage**: PRIMARY API key only (never managed by Butler)
 
@@ -126,10 +126,10 @@ This document contains operational protocols, agent responsibilities, workflows,
 **Workflow**:
 ```
 1. Human provides task
-2. Zorro delegates to Factory Manager
-3. Zorro monitors via Moderator updates
-4. Zorro makes strategic decisions
-5. Zorro confirms completion with human
+2. Zoro delegates to Factory Manager
+3. Zoro monitors via Moderator updates
+4. Zoro makes strategic decisions
+5. Zoro confirms completion with human
 ```
 
 **Critical Rules**:
@@ -149,7 +149,7 @@ This document contains operational protocols, agent responsibilities, workflows,
 **Domain**: Sub-agent creation and task decomposition
 
 **Autonomous Actions**:
-- Receive ALL tasks from Zorro
+- Receive ALL tasks from Zoro
 - Analyze task requirements
 - Create PRDs
 - Create Ant Farm lanes
@@ -164,12 +164,12 @@ This document contains operational protocols, agent responsibilities, workflows,
 **API Usage**: Secondary API (managed by Butler)
 
 **Communication Channels**:
-- IN: Zorro (tasks)
+- IN: Zoro (tasks)
 - OUT: Ant Farm (hand off complete setup - sub-agents + coordinators)
 
 **Workflow - Agent Creation & Ant Farm Setup**:
 ```
-1. Receive task from Zorro
+1. Receive task from Zoro
 2. Analyze task complexity, dependencies, duration
 3. Create comprehensive PRD:
    - Task description
@@ -243,13 +243,13 @@ AgentRegistry = {
 - Summon Janitor after completion
 
 **Requires Approval**:
-- Escalating critical blockers to Zorro
+- Escalating critical blockers to Zoro
 
 **API Usage**: Secondary API (managed by Butler)
 
 **Communication Channels**:
 - **Within Ant Farm**: Butler, Librarian, Gatekeeper, Sub-agents (continuous coordination)
-- **To Outside**: Zorro (progress reports), Janitor (cleanup summons after tasks complete)
+- **To Outside**: Zoro (progress reports), Janitor (cleanup summons after tasks complete)
 - **GitHub**: Dashboard updates (real-time status)
 
 **Workflow - Continuous Monitoring**:
@@ -267,7 +267,7 @@ Every 30-60 seconds:
 5. Commit and push to GitHub
 
 Every 5 minutes (or immediate if critical):
-6. Compile report for Zorro:
+6. Compile report for Zoro:
    - Task completion percentages
    - Active blockers
    - Resource utilization
@@ -353,7 +353,7 @@ BlockerLog = {
 **Location**: INSIDE the Ant Farm structure, managing resources in real-time alongside sub-agents
 
 **Autonomous Actions**:
-- Manage ALL secondary API keys (for ALL except Zorro)
+- Manage ALL secondary API keys (for ALL except Zoro)
 - Monitor token usage and rate limits
 - Rotate API keys at 80% threshold
 - Prevent context overflow
@@ -855,9 +855,9 @@ StatusUpdate = {
 
 ```
 Phase 1: Initiation
-1. Human → Zorro: Task
-2. Zorro → Factory Manager: Delegate task
-3. Zorro: Monitor (does NOT create agents/teams)
+1. Human → Zoro: Task
+2. Zoro → Factory Manager: Delegate task
+3. Zoro: Monitor (does NOT create agents/teams)
 
 Phase 2: Agent Creation
 4. Factory Manager: Analyze task
@@ -877,7 +877,7 @@ Phase 3: Execution
 16. Sub-agents → Moderator: Status updates (every 30-60s)
 17. Moderator: Track progress, handle blockers
 18. Moderator: Update GitHub dashboard (every 30-60s)
-19. Moderator → Zorro: Progress reports (every 5min or immediate)
+19. Moderator → Zoro: Progress reports (every 5min or immediate)
 
 Phase 4: Code Review
 20. Sub-agent: Complete code
@@ -889,8 +889,8 @@ Phase 4: Code Review
 Phase 5: Completion
 25. Sub-agent → Moderator: Task complete
 26. Moderator: Validate against PRD
-27. Moderator → Zorro: Completion report
-28. Zorro → Human: Confirm completion
+27. Moderator → Zoro: Completion report
+28. Zoro → Human: Confirm completion
 
 Phase 6: Cleanup
 29. Moderator: Verify all tasks complete
@@ -956,21 +956,21 @@ Continuous monitoring by Butler:
 
 ### Direct Communication Channels
 
-**Zorro**:
+**Zoro**:
 - IN: Human
 - OUT: Factory Manager, Moderator
 
 **Factory Manager**:
-- IN: Zorro
+- IN: Zoro
 - OUT: Librarian, Butler, Moderator
 
 **Moderator**:
 - IN: Sub-agents, Butler, Librarian
-- OUT: Zorro, Factory Manager, Librarian, Butler, Gatekeeper, Janitor, GitHub
+- OUT: Zoro, Factory Manager, Librarian, Butler, Gatekeeper, Janitor, GitHub
 
 **Butler**:
 - IN: Factory Manager, Sub-agents, Security Officer
-- OUT: All agents (except Zorro), Moderator
+- OUT: All agents (except Zoro), Moderator
 
 **Librarian**:
 - IN: Factory Manager, Moderator, Sub-agents
@@ -1013,7 +1013,7 @@ Continuous monitoring by Butler:
 - High-value transactions → Security Officer approval
 - .env modifications → Security Officer approval
 - Cleanup operations → Moderator summons required
-- Critical blocker escalations → Zorro approval
+- Critical blocker escalations → Zoro approval
 
 ### Private Things Stay Private
 
@@ -1056,13 +1056,13 @@ Continuous monitoring by Butler:
 
 ### API Key Management
 
-**Primary API** (Zorro only):
+**Primary API** (Zoro only):
 - Never managed by Butler
 - Never rotated
 - Never shared
 - Separate monitoring
 
-**Secondary APIs** (All except Zorro):
+**Secondary APIs** (All except Zoro):
 - Managed by Butler
 - Stored by Security Officer in .env
 - Rotated at 80% threshold
@@ -1143,7 +1143,7 @@ ANT FARM STRUCTURE
 2. Track progress per lane
 3. Handle blockers per lane
 4. Coordinate resources across lanes
-5. Report lane status to Zorro
+5. Report lane status to Zoro
 ```
 
 ### Lane Coordination
@@ -1365,9 +1365,9 @@ Applied: Updated Butler rotation protocol
 ```javascript
 {
   agent_id: string,
-  type: 'Zorro'|'Factory Manager'|'Moderator'|'Butler'|...,
+  type: 'Zoro'|'Factory Manager'|'Moderator'|'Butler'|...,
   domain: string,
-  api_key: string (if not Zorro),
+  api_key: string (if not Zoro),
   skills: string[],
   status: 'active'|'idle'|'blocked'|'terminated',
   created_at: datetime
@@ -1448,7 +1448,7 @@ Applied: Updated Butler rotation protocol
 **Level 1**: Sub-agent handles
 **Level 2**: Moderator coordinates
 **Level 3**: Specialist resolves (Librarian/Butler/etc.)
-**Level 4**: Zorro decides (critical only)
+**Level 4**: Zoro decides (critical only)
 
 ### Critical Thresholds
 
@@ -1461,8 +1461,8 @@ Applied: Updated Butler rotation protocol
 
 ### Forbidden Actions
 
-❌ Zorro creating teams (Factory Manager does)
-❌ Zorro spawning agents (Factory Manager does)
+❌ Zoro creating teams (Factory Manager does)
+❌ Zoro spawning agents (Factory Manager does)
 ❌ Janitor running during active tasks
 ❌ Skipping Factory Manager for tasks
 ❌ Butler managing primary API

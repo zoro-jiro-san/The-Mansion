@@ -19,14 +19,14 @@ This architectural system is organized into four complementary documents:
 
 ## Overview
 
-The Zoro agent system is architected as a hierarchical mansion structure, where **Zorro** serves as the master orchestrator and head of the household. The mansion operates with specialized agents, each fulfilling distinct roles in a coordinated workflow.
+The Zoro agent system is architected as a hierarchical mansion structure, where **Zoro** serves as the master orchestrator and head of the household. The mansion operates with specialized agents, each fulfilling distinct roles in a coordinated workflow.
 
 **Key Innovation**: Butler, Librarian, Gatekeeper, and Moderator work **INSIDE the Ant Farm** with sub-agents, not managing from outside. This enables embedded coordination, faster response times, and real-time learning.
 
 ## Architecture Philosophy
 
 The mansion architecture follows a **hierarchical orchestration pattern** where:
-- **Zorro** (Primary Agent) operates at the top level using the primary API key
+- **Zoro** (Primary Agent) operates at the top level using the primary API key
 - All sub-agents operate using secondary API keys managed by the Butler
 - Each agent has specialized responsibilities and clear communication channels
 - Task execution follows a structured workflow from creation to completion
@@ -39,13 +39,13 @@ The mansion architecture follows a **hierarchical orchestration pattern** where:
 
 1. **Task Flow**: 
    - ✅ **ALL tasks from human user go DIRECTLY to Factory Manager**
-   - ❌ Zorro does NOT create teams or spawn agents directly
-   - ✅ Zorro delegates ALL task execution to Factory Manager
+   - ❌ Zoro does NOT create teams or spawn agents directly
+   - ✅ Zoro delegates ALL task execution to Factory Manager
    - ✅ Factory Manager is responsible for ALL agent creation and spawning
 
 2. **Factory Manager Responsibilities**:
-   - ✅ Receives ALL tasks from Zorro
-   - ✅ Creates teams when needed (NOT Zorro's job)
+   - ✅ Receives ALL tasks from Zoro
+   - ✅ Creates teams when needed (NOT Zoro's job)
    - ✅ Discusses with Librarian about what skills agents need
    - ✅ Coordinates with Butler for API key assignment
    - ✅ Creates PRD for each task
@@ -54,7 +54,7 @@ The mansion architecture follows a **hierarchical orchestration pattern** where:
 3. **Butler API Management**:
    - ✅ Butler assesses the work and assigns appropriate secondary API key
    - ✅ Butler rotates API keys when **80% limit is reached** (not 90%)
-   - ✅ Butler manages ALL secondary API keys for ALL mansion members (except Zorro)
+   - ✅ Butler manages ALL secondary API keys for ALL mansion members (except Zoro)
 
 4. **Janitor Timing**:
    - ✅ Janitor ONLY runs AFTER tasks are completed
@@ -64,7 +64,7 @@ The mansion architecture follows a **hierarchical orchestration pattern** where:
 
 5. **Team Creation**:
    - ✅ Factory Manager creates teams (during agent spawning)
-   - ❌ Zorro does NOT create teams
+   - ❌ Zoro does NOT create teams
    - ✅ Moderator manages teams created by Factory Manager
 
 6. **Ant Farm Organization**:
@@ -145,7 +145,7 @@ The mansion architecture follows a **hierarchical orchestration pattern** where:
 ```
 
 **Hierarchy Rules**:
-- **Zorro**: Top level, uses PRIMARY API exclusively, delegates to Factory Manager
+- **Zoro**: Top level, uses PRIMARY API exclusively, delegates to Factory Manager
 - **Factory Manager**: Creates PRDs, spawns Ant Farm with sub-agents + embedded coordinators
 - **Security Officer**: Protects sensitive resources (.env, wallets, transactions)
 - **Ant Farm Structure**: Where all the work happens
@@ -158,7 +158,7 @@ The mansion architecture follows a **hierarchical orchestration pattern** where:
 
 ## Agent Roles & Responsibilities
 
-### 1. Zorro - The Master Orchestrator
+### 1. Zoro - The Master Orchestrator
 
 **Role**: Primary agent and head of the mansion
 
@@ -171,7 +171,7 @@ The mansion architecture follows a **hierarchical orchestration pattern** where:
 
 **API Usage**:
 - **Exclusively uses the PRIMARY API key**
-- Only Zorro has access to the primary API
+- Only Zoro has access to the primary API
 - All other agents use secondary APIs managed by Butler
 
 **Key Interactions**:
@@ -182,16 +182,16 @@ The mansion architecture follows a **hierarchical orchestration pattern** where:
 
 **CRITICAL WORKFLOW RULE**: 
 - **ALL tasks from human user go DIRECTLY to Factory Manager**
-- Zorro does NOT create teams or spawn agents directly
-- Zorro delegates ALL task execution to Factory Manager
+- Zoro does NOT create teams or spawn agents directly
+- Zoro delegates ALL task execution to Factory Manager
 - Factory Manager is responsible for ALL agent creation and spawning
 
 **Workflow**:
-1. Human provides task to Zorro
-2. Zorro receives task and immediately delegates to Factory Manager
-3. Zorro monitors progress through Moderator (receives updates only)
-4. Zorro receives final completion status from Moderator
-5. Zorro never directly creates teams or spawns agents - this is Factory Manager's responsibility
+1. Human provides task to Zoro
+2. Zoro receives task and immediately delegates to Factory Manager
+3. Zoro monitors progress through Moderator (receives updates only)
+4. Zoro receives final completion status from Moderator
+5. Zoro never directly creates teams or spawns agents - this is Factory Manager's responsibility
 
 ---
 
@@ -199,7 +199,7 @@ The mansion architecture follows a **hierarchical orchestration pattern** where:
 
 **Role**: API key and resource management specialist
 
-**CRITICAL RESPONSIBILITY**: Butler manages **ALL secondary API keys for ALL mansion members EXCEPT Zorro**. This includes:
+**CRITICAL RESPONSIBILITY**: Butler manages **ALL secondary API keys for ALL mansion members EXCEPT Zoro**. This includes:
 - Factory Manager
 - Moderator
 - Librarian
@@ -209,7 +209,7 @@ The mansion architecture follows a **hierarchical orchestration pattern** where:
 - All Sub-Agents
 
 **Responsibilities**:
-- **Universal API Key Management**: Manages secondary API keys for ALL mansion members (except Zorro)
+- **Universal API Key Management**: Manages secondary API keys for ALL mansion members (except Zoro)
 - **Token & Credit Monitoring**: Tracks usage across all API providers (e.g., Groq, Kimi K2)
 - **Rate Limit Management**: Monitors token limits, requests per day, requests per minute, and usage quotas
 - **Context Overflow Prevention**: Monitors context window usage and prevents overflow
@@ -222,7 +222,7 @@ The mansion architecture follows a **hierarchical orchestration pattern** where:
 **How Butler Works**:
 
 **1. API Key Assignment Process**:
-- When any mansion member (except Zorro) needs an API key, they request from Butler
+- When any mansion member (except Zoro) needs an API key, they request from Butler
 - Butler maintains a pool of available secondary API keys
 - Butler assigns keys based on:
   - Current usage levels
@@ -308,12 +308,12 @@ The mansion architecture follows a **hierarchical orchestration pattern** where:
 - **Context Compression**: Compresses context when possible
 
 **Key Interactions**:
-- Receives API requests from ALL mansion members (except Zorro)
+- Receives API requests from ALL mansion members (except Zoro)
 - Provides API keys to Factory Manager, Moderator, Librarian, Security Officer, Gatekeeper, Janitor, and all Sub-Agents
 - **Coordinates with Ant Farm lanes**: Allocates API keys to each Ant Farm lane, monitors usage per lane, rotates keys per lane
 - Coordinates with Moderator for resource allocation updates
 - Coordinates with Librarian for skill-resource alignment in Ant Farm lanes
-- Never interacts with primary API key (Zorro's exclusive)
+- Never interacts with primary API key (Zoro's exclusive)
 - Receives usage reports from all agents and Ant Farm lanes
 - Provides usage statistics to Moderator for reporting
 
@@ -450,7 +450,7 @@ Skills Library/
 - **Task Monitoring**: Tracks progress, blockers, and status of all sub-agent tasks
 - **Inter-Agent Coordination**: Facilitates communication between sub-agents
 - **Blocker Resolution**: Identifies and escalates blockers to appropriate agents
-- **Progress Reporting**: Provides regular updates to Zorro
+- **Progress Reporting**: Provides regular updates to Zoro
 - **HR Functions**: Manages sub-agent lifecycle, performance, and resource needs
 - **Team Formation**: Can create teams of sub-agents for complex tasks
 - **GitHub Monitoring Dashboard**: Maintains real-time monitoring dashboard on GitHub
@@ -481,7 +481,7 @@ Skills Library/
   - **Code Blocker**: Code review needed → Contact Gatekeeper
   - **Security Blocker**: Security issue → Contact Security Officer
 - **Blocker Resolution**: Coordinates resolution with appropriate specialist agents
-- **Escalation**: Escalates critical blockers to Zorro immediately
+- **Escalation**: Escalates critical blockers to Zoro immediately
 
 **4. Inter-Agent Coordination**:
 - **Communication Facilitation**: Enables communication between sub-agents
@@ -521,7 +521,7 @@ Skills Library/
 - **Public Access**: Repository is publicly accessible (hosted on GitHub for free)
 - **Format**: Updates in both human-readable markdown and machine-readable JSON
 
-**6. Progress Reporting to Zorro**:
+**6. Progress Reporting to Zoro**:
 - **Regular Updates**: Provides updates at configurable intervals (default: every 5 minutes)
 - **Immediate Updates**: Sends immediate updates for:
   - Critical blockers
@@ -537,13 +537,13 @@ Skills Library/
   - GitHub dashboard link for detailed view
 
 **7. Team Management**:
-- **Team Formation**: Factory Manager creates teams (NOT Moderator or Zorro)
+- **Team Formation**: Factory Manager creates teams (NOT Moderator or Zoro)
 - **Team Assignment**: Factory Manager assigns team-level tasks
 - **Team Coordination**: Moderator coordinates communication within teams
 - **Team Progress Tracking**: Moderator tracks progress at team level
 - **Team Performance**: Moderator monitors team performance metrics
 
-**NOTE**: Teams are created by Factory Manager during agent spawning phase, not by Moderator or Zorro.
+**NOTE**: Teams are created by Factory Manager during agent spawning phase, not by Moderator or Zoro.
 
 **Monitoring Capabilities**:
 - Real-time task status tracking
@@ -564,9 +564,9 @@ Skills Library/
    - Factory Manager (if new agent needed)
    - Gatekeeper (if code review needed)
    - Security Officer (if security issue)
-4. **Level 4 (Zorro Level)**: Escalate critical blockers to Zorro
+4. **Level 4 (Zoro Level)**: Escalate critical blockers to Zoro
 
-**Update Flow to Zorro**:
+**Update Flow to Zoro**:
 - Regular status updates (configurable interval, default: 5 minutes)
 - Immediate updates for critical blockers
 - Summary reports with:
@@ -598,7 +598,7 @@ Skills Library/
 - Contacts Librarian for skill requests
 - Contacts Butler for API/resource requests and usage data
 - Contacts Factory Manager for new agent needs
-- Provides updates to Zorro
+- Provides updates to Zoro
 - Coordinates with Gatekeeper for code reviews
 - Updates GitHub monitoring dashboard continuously (includes Ant Farm lane status)
 - Receives status updates from sub-agents in all lanes
@@ -673,7 +673,7 @@ Skills Library/
 - Multi-signature support (if applicable)
 
 **Transaction Review Process**:
-1. Receive transaction request from agent or Zorro
+1. Receive transaction request from agent or Zoro
 2. Validate transaction parameters (amount, destination, gas fees)
 3. Check against security policies and whitelists
 4. Verify destination addresses (check against known addresses)
@@ -694,7 +694,7 @@ Skills Library/
 7. Re-encrypt .env file
 
 **Key Interactions**:
-- Receives transaction requests from sub-agents or Zorro
+- Receives transaction requests from sub-agents or Zoro
 - Receives API key storage requests from Butler
 - Receives environment variable requests from agents
 - Provides transaction status updates
@@ -773,12 +773,12 @@ Skills Library/
 
 **Role**: Sub-agent creation and task assignment specialist
 
-**CRITICAL RESPONSIBILITY**: Factory Manager receives **ALL tasks directly from Zorro**. Zorro does NOT create teams or spawn agents - Factory Manager handles ALL agent creation and spawning.
+**CRITICAL RESPONSIBILITY**: Factory Manager receives **ALL tasks directly from Zoro**. Zoro does NOT create teams or spawn agents - Factory Manager handles ALL agent creation and spawning.
 
 **Responsibilities**:
-- **Primary Task Receiver**: Receives ALL tasks from Zorro (Zorro delegates all tasks here)
+- **Primary Task Receiver**: Receives ALL tasks from Zoro (Zoro delegates all tasks here)
 - **Sub-Agent Creation**: Spawns new sub-agents based on task requirements
-- **Team Creation**: Creates teams of sub-agents when needed (NOT Zorro's responsibility)
+- **Team Creation**: Creates teams of sub-agents when needed (NOT Zoro's responsibility)
 - **Task Analysis**: Analyzes tasks to determine required agent types
 - **PRD Creation**: Creates detailed Product Requirements Documents (PRDs) for sub-agents
 - **Resource Coordination**: Coordinates with Butler (API keys) and Librarian (skills)
@@ -796,7 +796,7 @@ Each PRD includes:
 7. **Timeline**: Estimated completion time
 
 **Agent Creation Workflow**:
-1. **Receive Task**: Factory Manager receives task assignment DIRECTLY from Zorro (ALL tasks go here first)
+1. **Receive Task**: Factory Manager receives task assignment DIRECTLY from Zoro (ALL tasks go here first)
 2. **Task Analysis**: Analyzes task to understand:
    - Complexity level
    - Required capabilities
@@ -805,7 +805,7 @@ Each PRD includes:
    - Resource requirements
 3. **Agent Type Determination & Ant Farm Creation**: Determines what type of agent(s) needed:
    - Single specialized agent
-   - Team of agents (Factory Manager creates teams, NOT Zorro)
+   - Team of agents (Factory Manager creates teams, NOT Zoro)
    - **Ant Farm lanes**: Creates parallel execution lanes (Ant Farm structure) for sub-agents
    - **Ant Farm Organization**: Sub-agents MUST be organized in Ant Farm lanes
 4. **PRD Creation**: Creates comprehensive PRD including:
@@ -834,7 +834,7 @@ Each PRD includes:
 - Factory Manager discusses with Librarian about what skills agents need BEFORE spawning
 - Butler assesses the work and assigns appropriate secondary API key per Ant Farm lane
 - Butler rotates API keys when 80% limit is reached (not 90%)
-- Factory Manager handles ALL team creation - Zorro does NOT create teams
+- Factory Manager handles ALL team creation - Zoro does NOT create teams
 - **Sub-agents MUST be organized in Ant Farm lanes**
 - **Ant Farm lanes are coordinated with Moderator (management), Librarian (skills), and Butler (API keys)**
 
@@ -844,11 +844,11 @@ Each PRD includes:
 - **Team Agents**: Agents designed to work in teams
 
 **Key Interactions**:
-- **Receives ALL tasks from Zorro** (ALL tasks go directly to Factory Manager)
+- **Receives ALL tasks from Zoro** (ALL tasks go directly to Factory Manager)
 - **Discusses with Librarian** about what skills agents will need
 - Requests API keys from Butler (Butler assesses work and assigns)
 - Receives skills from Librarian (after discussion)
-- **Creates teams** when needed (Factory Manager handles ALL team creation, NOT Zorro)
+- **Creates teams** when needed (Factory Manager handles ALL team creation, NOT Zoro)
 - Spawns sub-agents with complete setup
 - Hands off to Moderator for management
 - Coordinates with Moderator for additional agent needs
@@ -879,7 +879,7 @@ Each PRD includes:
 - **Primary Trigger**: Task completion signal from Moderator (Moderator summons Janitor after job completion)
 - Scheduled cleanup cycles (only when no active tasks)
 - Storage threshold reached (only when no active tasks)
-- Manual cleanup request from Zorro (only when no active tasks)
+- Manual cleanup request from Zoro (only when no active tasks)
 
 **IMPORTANT**: Janitor must verify no active tasks exist before running cleanup. If tasks are active, Janitor should wait for Moderator's signal.
 
@@ -904,7 +904,7 @@ Each PRD includes:
 
 **Key Interactions**:
 - **Receives summons from Moderator**: Janitor is summoned by Moderator AFTER tasks are completed
-- Receives cleanup requests from Zorro (manual, only when no active tasks)
+- Receives cleanup requests from Zoro (manual, only when no active tasks)
 - Coordinates with Gatekeeper to verify Git status
 - Reports cleanup results to Moderator
 - **Never runs during active tasks**: Janitor must verify no active tasks before cleanup
@@ -1205,7 +1205,7 @@ The Learning System enables sub-agents and mansion members to learn from success
 - Receives alerts from Butler about rate limit proximity
 - Adjusts task scheduling based on resource availability
 - Coordinates with Factory Manager to delay agent creation if needed
-- Reports resource status to Zorro
+- Reports resource status to Zoro
 
 **Sub-Agents**:
 - Receive API keys from Butler with usage guidelines
@@ -1224,12 +1224,12 @@ The Learning System enables sub-agents and mansion members to learn from success
 ## Complete Workflow: Task Execution Lifecycle
 
 ### Phase 1: Task Initiation
-1. **Human User** → Provides task to **Zorro**
-2. **Zorro** → Receives task and immediately delegates to **Factory Manager** (ALL tasks go directly to Factory Manager)
-3. **Zorro** → Does NOT create teams or spawn agents (this is Factory Manager's responsibility)
+1. **Human User** → Provides task to **Zoro**
+2. **Zoro** → Receives task and immediately delegates to **Factory Manager** (ALL tasks go directly to Factory Manager)
+3. **Zoro** → Does NOT create teams or spawn agents (this is Factory Manager's responsibility)
 
 ### Phase 2: Agent Creation & Ant Farm Setup
-4. **Factory Manager** → Receives task from Zorro (ALL tasks come here first)
+4. **Factory Manager** → Receives task from Zoro (ALL tasks come here first)
 5. **Factory Manager** → Analyzes task requirements
 6. **Factory Manager** → Creates PRD (Task, Roadmap, Checkpoints, Tests, Success Criteria)
 7. **Factory Manager** → **Creates Ant Farm lanes** (sub-agents MUST be organized in Ant Farm structure)
@@ -1294,20 +1294,20 @@ The Learning System enables sub-agents and mansion members to learn from success
     - Updates api-usage.md with usage statistics
     - Updates latest-update.md with timestamp
     - Commits and pushes to GitHub repository
-29. **Moderator** → Provides update to **Zorro**:
+29. **Moderator** → Provides update to **Zoro**:
     - Task completion percentages
     - Active blockers
     - Resource utilization
     - Performance metrics
     - GitHub dashboard link for detailed view
-30. **Zorro** → Reviews progress and makes decisions
-31. **Zorro** → Can view real-time status on GitHub dashboard
+30. **Zoro** → Reviews progress and makes decisions
+31. **Zoro** → Can view real-time status on GitHub dashboard
 
 ### Phase 7: Task Completion
 29. **Sub-Agent** → Completes task → Reports to Moderator
 30. **Moderator** → Validates completion against PRD success criteria
-31. **Moderator** → Reports completion to Zorro
-32. **Zorro** → Confirms completion with human user
+31. **Moderator** → Reports completion to Zoro
+32. **Zoro** → Confirms completion with human user
 
 ### Phase 8: Cleanup (ONLY AFTER TASK COMPLETION)
 33. **Moderator** → Validates all tasks are completed
@@ -1484,8 +1484,8 @@ If Rejected: Sub-Agent → Fix Issues → Resubmit
 ### Inter-Agent Communication Channels
 
 **Direct Communication**:
-- Zorro ↔ Factory Manager (task delegation)
-- Zorro ↔ Moderator (progress updates)
+- Zoro ↔ Factory Manager (task delegation)
+- Zoro ↔ Moderator (progress updates)
 - Factory Manager ↔ Butler (API key requests)
 - Factory Manager ↔ Librarian (skill requests)
 - Factory Manager ↔ Security Officer (API key storage requests)
@@ -1517,16 +1517,16 @@ If Rejected: Sub-Agent → Fix Issues → Resubmit
 
 ## API Key Management Strategy
 
-### Primary API Key (Zorro Only)
-- **Access**: Exclusive to Zorro
+### Primary API Key (Zoro Only)
+- **Access**: Exclusive to Zoro
 - **Usage**: Orchestration and delegation only
 - **Protection**: Never shared, never rotated, never managed by Butler
 - **Monitoring**: Separate monitoring (not managed by Butler)
 - **Storage**: Managed by Security Officer in .env file
 
-### Secondary API Keys (ALL Mansion Members Except Zorro)
+### Secondary API Keys (ALL Mansion Members Except Zoro)
 
-**CRITICAL**: Butler manages secondary API keys for **ALL mansion members EXCEPT Zorro**:
+**CRITICAL**: Butler manages secondary API keys for **ALL mansion members EXCEPT Zoro**:
 - ✅ Factory Manager
 - ✅ Moderator
 - ✅ Librarian
@@ -1553,7 +1553,7 @@ If Rejected: Sub-Agent → Fix Issues → Resubmit
 - Butler maintains registry of all keys and their assignments
 
 **2. Key Assignment**:
-- When any mansion member (except Zorro) needs an API key:
+- When any mansion member (except Zoro) needs an API key:
   1. Request key from Butler
   2. Butler selects appropriate key from available pool
   3. Butler assigns key to requesting agent
@@ -1676,8 +1676,8 @@ If Rejected: Sub-Agent → Fix Issues → Resubmit
 - Cleanup effectiveness
 
 ### Reporting
-- Real-time dashboards (for Zorro)
-- Regular status updates (Moderator → Zorro)
+- Real-time dashboards (for Zoro)
+- Regular status updates (Moderator → Zoro)
 - Cleanup reports (Janitor → Moderator)
 - Security audit logs (Gatekeeper, Security Officer)
 
@@ -1708,7 +1708,7 @@ If Rejected: Sub-Agent → Fix Issues → Resubmit
 
 ### For New Agents
 When implementing this architecture:
-1. Start with Zorro (primary orchestrator)
+1. Start with Zoro (primary orchestrator)
 2. Implement Butler (API management)
 3. Implement Librarian (skills management)
 4. Implement Factory Manager (agent creation)
@@ -1730,7 +1730,7 @@ When implementing this architecture:
 
 - **PRD**: Product Requirements Document - Detailed task specification
 - **Sub-Agent**: Specialized agent created by Factory Manager
-- **Primary API**: Zorro's exclusive API key
+- **Primary API**: Zoro's exclusive API key
 - **Secondary API**: Sub-agent API keys managed by Butler
 - **Blocker**: Issue preventing task progress
 - **Checkpoint**: Milestone marker in task roadmap
@@ -1744,8 +1744,8 @@ This mansion architecture provides a robust, scalable, and maintainable framewor
 
 ### Key Features
 
-1. **Hierarchical Structure**: Clear hierarchy with Zorro at the top, managing all mansion members
-2. **Comprehensive API Management**: Butler manages ALL secondary API keys for ALL mansion members (except Zorro)
+1. **Hierarchical Structure**: Clear hierarchy with Zoro at the top, managing all mansion members
+2. **Comprehensive API Management**: Butler manages ALL secondary API keys for ALL mansion members (except Zoro)
 3. **Context & Rate Limit Management**: Proactive prevention of context overflow and rate limit violations
 4. **Parallel Execution**: Ant Farm structure enables parallel execution lanes for increased throughput
 5. **Learning System**: Adaptive intelligence that learns from patterns and improves over time
