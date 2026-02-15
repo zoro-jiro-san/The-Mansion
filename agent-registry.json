@@ -92,8 +92,65 @@
       }
     ]
   },
-  "active_sub_agents": [],
-  "active_ant_farms": [],
-  "total_active_agents": 7,
-  "total_sub_agents": 0
+  "active_sub_agents": [
+    {
+      "agent_id": "sa-001",
+      "name": "Pixel Artist & Designer",
+      "type": "specialist",
+      "domain": "Visual design, pixel art creation",
+      "status": "active",
+      "lane": "lane-1",
+      "ant_farm_id": "af-001",
+      "assigned_task": "PRD-001",
+      "skills": ["sk-pixel-art", "sk-visual-design"],
+      "api_key": "gemini-key-1",
+      "current_progress": "5%",
+      "checkpoint_target": "CP-1 (15:15)"
+    },
+    {
+      "agent_id": "sa-002",
+      "name": "Frontend Engineer",
+      "type": "specialist",
+      "domain": "React, animation systems, UI",
+      "status": "active",
+      "lane": "lane-2",
+      "ant_farm_id": "af-001",
+      "assigned_task": "PRD-001",
+      "skills": ["sk-react", "sk-typescript", "sk-animation", "sk-tailwind"],
+      "api_key": "nvidia-key-1",
+      "current_progress": "0%",
+      "checkpoint_target": "CP-2 (14:45)"
+    },
+    {
+      "agent_id": "sa-003",
+      "name": "Backend/Integration Engineer",
+      "type": "specialist",
+      "domain": "GitHub API, data integration, testing",
+      "status": "active",
+      "lane": "lane-2",
+      "ant_farm_id": "af-001",
+      "assigned_task": "PRD-001",
+      "skills": ["sk-github-api", "sk-testing", "sk-deployment"],
+      "api_key": "nvidia-key-1",
+      "current_progress": "0%",
+      "checkpoint_target": "CP-4 (17:15)"
+    }
+  ],
+  "active_ant_farms": [
+    {
+      "ant_farm_id": "af-001",
+      "name": "Mansion Pokemon Dashboard Control Center",
+      "task_id": "PRD-001",
+      "status": "active",
+      "created_at": "2026-02-15T13:35:00Z",
+      "lanes": ["lane-1", "lane-2"],
+      "sub_agents": ["sa-001", "sa-002", "sa-003"],
+      "coordinators": ["moderator", "butler", "librarian", "gatekeeper"],
+      "overall_progress": "5%",
+      "estimated_completion": "2026-02-15T19:45:00Z",
+      "priority": "high"
+    }
+  ],
+  "total_active_agents": 10,
+  "total_sub_agents": 3
 }

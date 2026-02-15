@@ -1,74 +1,151 @@
 {
   "metrics_version": "1.0",
-  "last_updated": "2026-02-15T00:00:00Z",
+  "last_updated": "2026-02-15T13:45:00Z",
+  "measurement_period_start": "2026-02-15T13:35:00Z",
   "system_health": {
-    "status": "idle",
-    "active_agents": 7,
-    "active_sub_agents": 0,
-    "active_ant_farms": 0,
-    "active_lanes": 0,
-    "active_blockers": 0,
-    "uptime_since": "2026-02-15T00:00:00Z"
+    "uptime_percent": 100,
+    "agents_active": 10,
+    "agents_healthy": 10,
+    "agents_blocked": 0,
+    "ant_farms_active": 1,
+    "session_duration_minutes": 10,
+    "status": "operational"
   },
-  "agent_performance": {
-    "summary": {
-      "total_tasks_completed": 0,
-      "total_tasks_failed": 0,
-      "overall_success_rate": 0,
-      "avg_task_duration_ms": 0,
-      "avg_blockers_per_task": 0
+  "per_agent_performance": {
+    "sa-001": {
+      "agent_id": "sa-001",
+      "name": "Pixel Artist",
+      "status": "active",
+      "tasks_assigned": 1,
+      "tasks_completed": 0,
+      "current_task": "PRD-001",
+      "current_progress": "5%",
+      "avg_task_duration_minutes": null,
+      "success_rate": null,
+      "time_on_current_task": "10 minutes",
+      "blocked": false,
+      "last_heartbeat": "2026-02-15T13:45:00Z"
     },
-    "per_agent": {}
-  },
-  "resource_usage": {
-    "api_keys": {
-      "total_available": 0,
-      "currently_active": 0,
-      "in_cooldown": 0,
-      "rotations_today": 0,
-      "total_tokens_used_today": 0,
-      "total_requests_today": 0
+    "sa-002": {
+      "agent_id": "sa-002",
+      "name": "Frontend Engineer",
+      "status": "active",
+      "tasks_assigned": 1,
+      "tasks_completed": 0,
+      "current_task": "PRD-001",
+      "current_progress": "0%",
+      "avg_task_duration_minutes": null,
+      "success_rate": null,
+      "time_on_current_task": "10 minutes",
+      "blocked": true,
+      "blocked_reason": "Waiting for scaffolding setup",
+      "last_heartbeat": "2026-02-15T13:45:00Z"
     },
-    "by_provider": {},
-    "context_windows": {
-      "summarizations_triggered": 0,
-      "truncations_triggered": 0,
-      "emergency_routings": 0
+    "sa-003": {
+      "agent_id": "sa-003",
+      "name": "Backend/Integration Engineer",
+      "status": "active",
+      "tasks_assigned": 1,
+      "tasks_completed": 0,
+      "current_task": "PRD-001",
+      "current_progress": "0%",
+      "avg_task_duration_minutes": null,
+      "success_rate": null,
+      "time_on_current_task": "10 minutes",
+      "blocked": true,
+      "blocked_reason": "Waiting for scaffolding setup",
+      "last_heartbeat": "2026-02-15T13:45:00Z"
     }
   },
-  "blocker_metrics": {
-    "total_reported": 0,
-    "total_resolved": 0,
-    "avg_resolution_time_ms": 0,
-    "by_type": {
-      "skill": 0,
-      "resource": 0,
-      "agent": 0,
-      "code": 0,
-      "security": 0
+  "resource_usage_by_provider": {
+    "gemini": {
+      "provider": "gemini",
+      "api_key": "gemini-key-1",
+      "requests_made": 5,
+      "tokens_used": 2850,
+      "rate_limit": "600 per day",
+      "current_usage_percent": 0.5,
+      "status": "healthy",
+      "rotation_threshold": 0.8,
+      "days_until_rotation": 90
     },
-    "escalation_rate": 0
+    "nvidia": {
+      "provider": "nvidia",
+      "api_key": "nvidia-key-1",
+      "requests_made": 8,
+      "tokens_used": 4200,
+      "rate_limit": "30 per minute",
+      "current_usage_percent": 1.4,
+      "status": "healthy",
+      "rotation_threshold": 0.8,
+      "days_until_rotation": 90
+    },
+    "mistral": {
+      "provider": "mistral",
+      "api_key": "mistral-key-1",
+      "requests_made": 0,
+      "tokens_used": 0,
+      "rate_limit": "unlimited for free tier",
+      "current_usage_percent": 0,
+      "status": "available",
+      "rotation_threshold": 0.8,
+      "days_until_rotation": 90
+    },
+    "cerebras": {
+      "provider": "cerebras",
+      "api_key": "cerebras-key-1",
+      "requests_made": 0,
+      "tokens_used": 0,
+      "rate_limit": "unlimited for free tier",
+      "current_usage_percent": 0,
+      "status": "available",
+      "rotation_threshold": 0.8,
+      "days_until_rotation": 90
+    }
   },
   "code_review_metrics": {
-    "total_reviews": 0,
-    "approved": 0,
-    "changes_requested": 0,
-    "rejected": 0,
-    "avg_review_time_ms": 0,
-    "post_merge_bugs": 0
+    "pending_reviews": 0,
+    "completed_reviews": 0,
+    "approved_prs": 0,
+    "requested_changes": 0,
+    "rejected_prs": 0,
+    "avg_review_time_minutes": null,
+    "gatekeeper_status": "ready"
   },
   "learning_metrics": {
-    "regressions_logged": 0,
-    "patterns_identified": 0,
-    "principles_updated": 0,
-    "skill_combinations_learned": 0
+    "new_patterns_learned": 0,
+    "regressions_found": 0,
+    "skill_combinations_tested": 0,
+    "effective_patterns": [],
+    "ineffective_patterns": []
   },
-  "thresholds": {
-    "api_rotation": "80%",
-    "context_summarization": "70%",
-    "context_truncation": "85%",
-    "context_emergency": "95%",
-    "rate_limit_warning": "75%",
-    "rate_limit_rotation": "80%"
+  "critical_thresholds": {
+    "api_rotation_threshold": 0.8,
+    "context_summarization_threshold": 0.7,
+    "context_truncation_threshold": 0.85,
+    "context_emergency_threshold": 0.95,
+    "rate_limit_warning": 0.75,
+    "rate_limit_rotation": 0.9,
+    "sub_agent_heartbeat_timeout_seconds": 120,
+    "blocker_escalation_timeout_seconds": 900
+  },
+  "task_af_001_metrics": {
+    "ant_farm_id": "af-001",
+    "task": "PRD-001 (Mansion Pokemon Dashboard)",
+    "start_time": "2026-02-15T13:35:00Z",
+    "estimated_completion": "2026-02-15T19:45:00Z",
+    "elapsed_minutes": 10,
+    "remaining_minutes_estimate": 350,
+    "overall_progress": "5%",
+    "lane_1_progress": "5%",
+    "lane_2_progress": "0%",
+    "blockers_active": 0,
+    "checkpoints_passed": 0,
+    "checkpoints_total": 5,
+    "api_tokens_used": 7050,
+    "api_tokens_budget": 300000,
+    "token_usage_percent": 2.35,
+    "sub_agents_active": 3,
+    "sub_agents_blocked": 0
   }
 }
