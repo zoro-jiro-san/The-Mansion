@@ -1,0 +1,99 @@
+{
+  "registry_version": "1.0",
+  "last_updated": "2026-02-15T00:00:00Z",
+  "mansion_agents": {
+    "strategic_layer": [
+      {
+        "agent_id": "zoro",
+        "type": "orchestrator",
+        "level": 1,
+        "domain": "Strategic oversight and human interface",
+        "api_type": "primary",
+        "status": "active",
+        "location": "above_ant_farm",
+        "communicates_with": ["factory-manager", "moderator"]
+      }
+    ],
+    "setup_layer": [
+      {
+        "agent_id": "factory-manager",
+        "type": "creator",
+        "level": 2,
+        "domain": "Task decomposition, PRD creation, agent spawning",
+        "api_type": "secondary",
+        "status": "active",
+        "location": "above_ant_farm",
+        "communicates_with": ["zoro", "librarian", "butler", "moderator"]
+      },
+      {
+        "agent_id": "security-officer",
+        "type": "guardian",
+        "level": 2,
+        "domain": "API keys, wallets, .env, transactions",
+        "api_type": "secondary",
+        "status": "active",
+        "location": "above_ant_farm",
+        "communicates_with": ["butler", "all_agents"]
+      }
+    ],
+    "ant_farm_coordinators": [
+      {
+        "agent_id": "moderator",
+        "type": "coordinator",
+        "level": 3,
+        "domain": "On-ground coordination, monitoring, GitHub dashboard",
+        "api_type": "secondary",
+        "status": "active",
+        "location": "inside_ant_farm",
+        "communicates_with": ["zoro", "factory-manager", "butler", "librarian", "gatekeeper", "janitor", "sub-agents", "github"]
+      },
+      {
+        "agent_id": "butler",
+        "type": "coordinator",
+        "level": 3,
+        "domain": "API management, rate limits, context overflow, rotation",
+        "api_type": "secondary",
+        "status": "active",
+        "location": "inside_ant_farm",
+        "communicates_with": ["factory-manager", "moderator", "librarian", "gatekeeper", "security-officer", "sub-agents"]
+      },
+      {
+        "agent_id": "librarian",
+        "type": "coordinator",
+        "level": 3,
+        "domain": "Skills library, skill matching, knowledge distribution",
+        "api_type": "secondary",
+        "status": "active",
+        "location": "inside_ant_farm",
+        "communicates_with": ["factory-manager", "moderator", "butler", "sub-agents"]
+      },
+      {
+        "agent_id": "gatekeeper",
+        "type": "coordinator",
+        "level": 3,
+        "domain": "Code review, security scanning, Git push authorization",
+        "api_type": "secondary",
+        "status": "active",
+        "location": "inside_ant_farm",
+        "communicates_with": ["moderator", "butler", "librarian", "sub-agents"]
+      }
+    ],
+    "cleanup_layer": [
+      {
+        "agent_id": "janitor",
+        "type": "maintenance",
+        "level": 4,
+        "domain": "System cleanup after task completion",
+        "api_type": "secondary",
+        "status": "standby",
+        "location": "outside_ant_farm",
+        "communicates_with": ["moderator"],
+        "activation_condition": "ALL tasks complete, Moderator summons"
+      }
+    ]
+  },
+  "active_sub_agents": [],
+  "active_ant_farms": [],
+  "total_active_agents": 7,
+  "total_sub_agents": 0
+}

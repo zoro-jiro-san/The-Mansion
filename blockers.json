@@ -1,0 +1,35 @@
+{
+  "blockers_version": "1.0",
+  "last_updated": "2026-02-15T00:00:00Z",
+  "active_blockers": [],
+  "resolved_blockers": [],
+  "blocker_stats": {
+    "total_reported": 0,
+    "total_resolved": 0,
+    "total_active": 0,
+    "avg_resolution_time_ms": 0,
+    "resolution_by_type": {
+      "skill": {"count": 0, "avg_time_ms": 0},
+      "resource": {"count": 0, "avg_time_ms": 0},
+      "agent": {"count": 0, "avg_time_ms": 0},
+      "code": {"count": 0, "avg_time_ms": 0},
+      "security": {"count": 0, "avg_time_ms": 0}
+    },
+    "escalation_rate": 0
+  },
+  "blocker_template": {
+    "blocker_id": "BLK-XXX",
+    "agent_id": "sa-XXX",
+    "lane": "lane-X",
+    "type": "skill|resource|agent|code|security",
+    "description": "",
+    "severity": "low|medium|high|critical",
+    "routed_to": "",
+    "reported_at": "",
+    "resolved_at": null,
+    "resolution": null,
+    "escalated_to_zoro": false,
+    "resolution_time_ms": null,
+    "learnings": ""
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "metrics_version": "1.0",
+  "last_updated": "2026-02-15T00:00:00Z",
+  "system_health": {
+    "status": "idle",
+    "active_agents": 7,
+    "active_sub_agents": 0,
+    "active_ant_farms": 0,
+    "active_lanes": 0,
+    "active_blockers": 0,
+    "uptime_since": "2026-02-15T00:00:00Z"
+  },
+  "agent_performance": {
+    "summary": {
+      "total_tasks_completed": 0,
+      "total_tasks_failed": 0,
+      "overall_success_rate": 0,
+      "avg_task_duration_ms": 0,
+      "avg_blockers_per_task": 0
+    },
+    "per_agent": {}
+  },
+  "resource_usage": {
+    "api_keys": {
+      "total_available": 0,
+      "currently_active": 0,
+      "in_cooldown": 0,
+      "rotations_today": 0,
+      "total_tokens_used_today": 0,
+      "total_requests_today": 0
+    },
+    "by_provider": {},
+    "context_windows": {
+      "summarizations_triggered": 0,
+      "truncations_triggered": 0,
+      "emergency_routings": 0
+    }
+  },
+  "blocker_metrics": {
+    "total_reported": 0,
+    "total_resolved": 0,
+    "avg_resolution_time_ms": 0,
+    "by_type": {
+      "skill": 0,
+      "resource": 0,
+      "agent": 0,
+      "code": 0,
+      "security": 0
+    },
+    "escalation_rate": 0
+  },
+  "code_review_metrics": {
+    "total_reviews": 0,
+    "approved": 0,
+    "changes_requested": 0,
+    "rejected": 0,
+    "avg_review_time_ms": 0,
+    "post_merge_bugs": 0
+  },
+  "learning_metrics": {
+    "regressions_logged": 0,
+    "patterns_identified": 0,
+    "principles_updated": 0,
+    "skill_combinations_learned": 0
+  },
+  "thresholds": {
+    "api_rotation": "80%",
+    "context_summarization": "70%",
+    "context_truncation": "85%",
+    "context_emergency": "95%",
+    "rate_limit_warning": "75%",
+    "rate_limit_rotation": "80%"
+  }
+}
