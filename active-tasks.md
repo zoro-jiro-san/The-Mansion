@@ -13,6 +13,7 @@
 **Status**: 🟢 ACTIVE (Just Launched)  
 **Priority**: HIGH  
 **Task**: PRD-001 — Pokemon-themed real-time portfolio dashboard  
+**Repository**: https://github.com/zoro-jiro-san/The-Dashboard  
 **Estimated Completion**: 2026-02-15 19:45 (~6 hours)  
 **Overall Progress**: 5% (Just started)  
 
